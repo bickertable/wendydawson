@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights — Wendy Dawson</title>
+<meta name="theme-color" content="#F2ECE1">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,300..700;1,300..700&family=Archivo:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#F2ECE1; --paper-deep:#E7DDC9; --ink:#2A2420; --ink-soft:#6B625A;
+  --clay:#AE5230; --sage:#7A8B3E; --rule:#DFD5BF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Petrona',Georgia,serif; font-size:18px; line-height:1.62;
+  -webkit-font-smoothing:antialiased; position:relative;
+}
+
+/* subtle grain, matching the source site's texture layer */
+.grain{position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.045; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.atmosphere{position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:radial-gradient(circle at 15% 4%, rgba(181,97,63,0.07), transparent 38%),
+             radial-gradient(circle at 88% 30%, rgba(124,139,111,0.08), transparent 34%);}
+
+.page-shell{position:relative; z-index:2;}
+
+a{color:var(--clay); text-decoration:none;}
+a:hover{text-decoration:underline;}
+:focus-visible{outline:2px solid var(--clay); outline-offset:3px;}
+
+.shell{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+/* ---------- entrance animation, one orchestrated pass ---------- */
+@keyframes rise{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+.rise{animation:rise 0.7s cubic-bezier(.2,.7,.3,1) both;}
+@media (prefers-reduced-motion:reduce){.rise{animation:none;}}
+
+.eyebrow{display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-size:12px;
+  font-weight:500; letter-spacing:0.32em; text-transform:uppercase; color:var(--clay);}
+.eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--clay); flex-shrink:0;}
+
+/* ---------- nav ---------- */
+header.site{border-bottom:1px solid var(--rule); padding:26px 0; position:relative; z-index:2;}
+.nav-row{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:14px;}
+.wordmark{font-family:'Petrona',serif; font-size:20px; font-weight:400; color:var(--ink);}
+.wordmark i{color:var(--clay); font-style:italic;}
+nav.links{display:flex; gap:28px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:500;
+  letter-spacing:0.08em; text-transform:uppercase;}
+nav.links a{color:var(--ink-soft);}
+nav.links a.current{color:var(--clay);}
+
+/* ---------- hero ---------- */
+.hero{padding:80px 0 56px; max-width:760px;}
+.hero h1{font-family:'Petrona',serif; font-weight:300; line-height:1.06; letter-spacing:-0.01em;
+  font-size:clamp(2.4rem,5.6vw,3.6rem); max-width:17ch; margin-top:22px;}
+.hero h1 i{color:var(--clay); font-style:italic; font-weight:400;}
+.rule-in{height:1px; width:88px; background:var(--rule); margin-top:34px;}
+.hero .lede{font-family:'Petrona',serif; font-weight:300; font-size:21px; color:var(--ink-soft);
+  margin-top:30px; max-width:52ch; line-height:1.55;}
+.hero .sig{margin-top:26px; font-size:17px; max-width:58ch; font-family:'Petrona',serif;}
+.hero .sig p{margin-bottom:14px;}
+
+.hero-split{display:grid; grid-template-columns:1.5fr 0.85fr; gap:56px; align-items:start; padding:80px 0 56px;}
+.hero-split .hero{padding:0; max-width:none;}
+.hero-portrait{padding-top:10px;}
+.hero-portrait .frame{position:relative; width:100%; max-width:280px;}
+.hero-portrait img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; position:relative; z-index:2;}
+.hero-portrait .frame::before{content:""; position:absolute; top:14px; left:14px; right:-14px; bottom:-14px;
+  border:1px solid var(--clay); opacity:0.55; z-index:1;}
+.hero-portrait .cap{font-family:'Archivo',sans-serif; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--ink-soft); margin-top:22px; max-width:280px;}
+
+/* ---------- generic sections ---------- */
+section.block{padding:58px 0; border-top:1px solid var(--rule); position:relative; z-index:2;}
+section.block:first-of-type{border-top:none;}
+h2{font-family:'Petrona',serif; font-weight:300; font-size:30px; line-height:1.22; max-width:20ch;}
+h2 i{color:var(--clay); font-style:italic; font-weight:400;}
+h3{font-family:'Petrona',serif; font-weight:500; font-size:22px; margin-bottom:10px;}
+.block p, .block li{font-size:18px; max-width:62ch; margin-top:14px; color:var(--ink);}
+.block p.soft{color:var(--ink-soft);}
+.two-col{display:grid; grid-template-columns:0.85fr 1.15fr; gap:52px; align-items:start;}
+.two-col h2{margin-bottom:2px;}
+
+/* ---------- pull quote ---------- */
+.pull{border-left:2px solid var(--clay); padding:4px 0 4px 24px; margin:28px 0; max-width:58ch;}
+.pull p{font-family:'Petrona',serif; font-size:23px; font-style:italic; font-weight:400; line-height:1.42;
+  color:var(--ink); margin:0;}
+
+/* ---------- numbered sequence ---------- */
+.sequence{display:flex; flex-direction:column; gap:0; margin-top:8px;}
+.seq-item{display:grid; grid-template-columns:64px 1fr; gap:20px; padding:32px 0; border-top:1px solid var(--rule);}
+.seq-item:first-child{border-top:none;}
+.seq-num{font-family:'Petrona',serif; font-size:30px; font-weight:300; font-style:italic; color:var(--sage); padding-top:0;}
+.seq-item h3{margin-bottom:10px;}
+.seq-item p{max-width:58ch;}
+
+/* ---------- boundary / refusal ---------- */
+.boundary{background:var(--paper-deep); padding:32px 34px; margin-top:20px; max-width:64ch; position:relative;}
+.boundary::before{content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--clay);}
+.boundary p{margin-top:12px;}
+.boundary p:first-child{margin-top:0;}
+
+.referral{border:1px solid var(--rule); padding:28px 30px; margin-top:20px; max-width:62ch;}
+.referral .tag{font-family:'Archivo',sans-serif; font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--sage); font-weight:600; margin-bottom:10px;}
+
+/* ---------- insights list ---------- */
+.article-row{padding:32px 0; border-top:1px solid var(--rule); display:grid; grid-template-columns:1fr auto;
+  gap:24px; align-items:baseline;}
+.article-row:first-child{border-top:none;}
+.article-row h3{font-size:23px; margin-bottom:8px; max-width:44ch;}
+.article-row p{margin-top:0; max-width:52ch;}
+.status{font-family:'Archivo',sans-serif; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--sage); white-space:nowrap; padding-top:4px;}
+
+/* ---------- CTA ---------- */
+.cta-block{background:var(--ink); color:var(--paper); padding:56px 44px; margin-top:8px; max-width:680px; position:relative; overflow:hidden;}
+.cta-block::after{content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
+  border:1px solid rgba(242,236,225,0.14);}
+.cta-block h2{color:var(--paper); max-width:20ch; position:relative; z-index:2;}
+.cta-block p{color:#CFC6B4; max-width:52ch; position:relative; z-index:2;}
+.btn{display:inline-block; margin-top:24px; background:var(--clay); color:#fff; font-family:'Archivo',sans-serif;
+  font-weight:600; font-size:14px; letter-spacing:0.06em; text-transform:uppercase; padding:14px 28px; position:relative; z-index:2;}
+.btn:hover{background:#954629; text-decoration:none;}
+.btn.on-dark{background:var(--paper); color:var(--ink);}
+.btn.on-dark:hover{background:#E4DAC5;}
+
+/* ---------- facts strip ---------- */
+.facts{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); margin-top:38px; max-width:760px;}
+.fact{background:var(--paper); padding:24px 22px;}
+.fact .n{font-family:'Archivo',sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--sage); margin-bottom:8px;}
+.fact .v{font-family:'Petrona',serif; font-size:19px;}
+
+.credential-note{font-family:'Archivo',sans-serif; font-size:12.5px; letter-spacing:0.02em;
+  color:var(--ink-soft); font-style:italic; margin-top:16px; max-width:56ch; line-height:1.6;}
+
+footer.site{border-top:1px solid var(--rule); padding:30px 0 48px; margin-top:20px; position:relative; z-index:2;}
+footer.site .shell{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;}
+footer.site p{font-family:'Archivo',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft);}
+
+@media (max-width:760px){
+  .two-col{grid-template-columns:1fr; gap:8px;}
+  .hero-split{grid-template-columns:1fr; gap:28px;}
+  .hero-portrait{order:-1;}
+  .hero-portrait .frame{max-width:180px;}
+  .facts{grid-template-columns:1fr;}
+  nav.links{gap:16px; font-size:11.5px;}
+  .article-row{grid-template-columns:1fr;}
+}
+</style></head><body>
+<div class="page-shell">
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<header class="site rise" style="animation-delay:0.05s"><div class="shell"><div class="nav-row">
+      <a class="wordmark" href="index.html">Wendy Dawson <i>&middot; Fractional CHRO</i></a>
+      <nav class="links"><a href="index.html">Home</a>
+<a href="wendy_approach.html">Approach</a>
+<a href="wendy_insights.html" class="current">Insights</a>
+<a href="wendy_engagements.html">How Engagements Start</a>
+<a href="wendy_contact.html">Contact</a></nav>
+    </div></div></header>
+
+<div class="shell">
+  <div class="hero" style="padding-bottom:16px;">
+    <p class="eyebrow rise" style="animation-delay:0.15s"><span class="dot"></span>Insights</p>
+    <h1 class="rise" style="animation-delay:0.25s">Notes from inside the <i>room</i>.</h1>
+    <div class="rule-in rise" style="animation-delay:0.35s"></div>
+    <p class="lede rise" style="animation-delay:0.4s">Notes on what happens inside a leadership team, and what it actually takes to change it.</p>
+  </div>
+</div>
+
+<section class="block"><div class="shell">
+  <div class="article-row">
+    <div>
+      <h3>The Retreat Worked. That's Not the Problem.</h3>
+      <p class="soft">Everyone leaves the room in agreement. Here's what happens next.</p>
+    </div>
+    <div class="status">In progress</div>
+  </div>
+  <div class="article-row">
+    <div>
+      <h3>Nobody Wants to Go First</h3>
+      <p class="soft">The team knows what's wrong. Nobody in the room will say it first.</p>
+    </div>
+    <div class="status">In progress</div>
+  </div>
+</div></section>
+
+<footer class="site rise" style="animation-delay:0.85s"><div class="shell">
+  <p>Wendy Dawson</p><p>Fractional CHRO</p>
+</div></footer>
+</div>
+</body></html>
